@@ -22,6 +22,36 @@ ball.draw = function (ctx, delta) {
     ctx.fill();
 };
 game.add(ball);
+var brickWall;
+(function (brickWall) {
+    brickWall[brickWall["margin"] = 20] = "margin";
+    brickWall[brickWall["xoffset"] = 65] = "xoffset";
+    brickWall[brickWall["yoffset"] = 20] = "yoffset";
+    brickWall[brickWall["columns"] = 5] = "columns";
+    brickWall[brickWall["rows"] = 4] = "rows";
+})(brickWall || (brickWall = {}));
+var brickColors = [
+    ex.Color.Vermillion,
+    ex.Color.Violet,
+    ex.Color.Orange,
+    ex.Color.Yellow
+];
+var brickUnit;
+(function (brickUnit) {
+    brickUnit[brickUnit["width"] = game.getWidth() / brickWall.columns - brickWall.margin - brickWall.margin / brickWall.columns] = "width";
+    brickUnit[brickUnit["height"] = 30] = "height";
+})(brickUnit || (brickUnit = {}));
+var bricks = [];
+for (var j = 0; j < brickWall.rows; j++) {
+    for (var i = 0; i < brickWall.columns; i++) {
+        bricks.push(new ex.Actor(brickWall.xoffset + i * (brickUnit.width + brickWall.margin) + brickWall.margin, brickWall.yoffset + j * (brickUnit.height + brickWall.margin) + brickWall.margin, brickUnit.width, brickUnit.height, brickColors[j % brickColors.length]));
+    }
+}
+bricks.forEach(function (brick) {
+    console.log(brick.x, brick.y, brick.color);
+    brick.collisionType = ex.CollisionType.Fixed;
+    game.add(brick);
+});
 ball.on('preupdate', function () {
     if (this.pos.x < (this.getWidth() / 2)) {
         this.vel.x *= -1;

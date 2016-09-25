@@ -36,6 +36,45 @@ ball.draw = function (ctx, delta) {
 
 game.add(ball);
 
+enum brickWall {
+    margin = 20,
+    xoffset = 65,
+    yoffset = 20,
+    columns = 5,
+    rows = 4
+}
+
+var brickColors = [
+    ex.Color.Vermillion,
+    ex.Color.Violet, 
+    ex.Color.Orange,
+    ex.Color.Yellow
+    ]
+
+enum brickUnit {
+    width = game.getWidth() / brickWall.columns - brickWall.margin - brickWall.margin / brickWall.columns,
+    height =  30
+}
+
+var bricks = [];
+for (var j = 0; j < brickWall.rows; j++){
+    for (var i = 0; i < brickWall.columns; i++){
+        bricks.push(new ex.Actor(
+            brickWall.xoffset + i * (brickUnit.width + brickWall.margin) + brickWall.margin,
+            brickWall.yoffset + j * (brickUnit.height + brickWall.margin) + brickWall.margin, 
+            brickUnit.width,
+            brickUnit.height,
+            brickColors[j % brickColors.length])
+        );
+    }
+}
+
+bricks.forEach(function(brick){
+    console.log(brick.x, brick.y, brick.color);
+    brick.collisionType = ex.CollisionType.Fixed;
+    game.add(brick);
+});
+
 ball.on('preupdate', function() {
     if (this.pos.x < (this.getWidth() / 2)){
         this.vel.x *= -1;
