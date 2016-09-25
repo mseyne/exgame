@@ -26,6 +26,14 @@ ball.vel.setTo(150, 150);
 
 ball.collisionType = ex.CollisionType.Elastic;
 
+ball.draw = function (ctx, delta) {
+    ctx.fillStyle = this.color.toString();
+    ctx.beginPath();
+    ctx.arc(this.pos.x, this.pos.y, 10, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+}
+
 game.add(ball);
 
 ball.on('preupdate', function() {
