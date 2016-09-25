@@ -1,0 +1,21 @@
+{
+	// Consultez https://go.microsoft.com/fwlink/?LinkId=759670
+	// pour accéder à la documentation relative au format jsconfig.json
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"allowSyntheticDefaultImports": true
+	},
+	"exclude": [
+		"node_modules",
+		"bower_components",
+		"jspm_packages",
+		"tmp",
+		"temp"
+	],
+	"files": [
+		"game.js",
+      	"js/excalibur-0.7.0.min.js",
+      	"js/excalibur-0.7.0.d.ts"
+	]
+}

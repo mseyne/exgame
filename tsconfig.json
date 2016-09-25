@@ -1,0 +1,18 @@
+{
+   "version": "2.0.3",
+   "compileOnSave": true,
+   "compilerOptions": {
+      "target": "ES5",
+      "declaration": false,
+      "noImplicitAny": false,
+      "removeComments": false,
+      "noLib": false,
+      "out": "game.js",
+      "watch": false
+   },
+   
+   "files": [
+      "game.ts",
+      "js/excalibur-0.7.0.d.ts"
+   ]
+}
